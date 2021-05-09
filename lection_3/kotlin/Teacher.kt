@@ -1,12 +1,12 @@
 class Teacher(_name: String, _surname: String, _age: Int, _numClass: Int, _workExperience: Double) {
     var name: String = _name
         get() {
-        return field.toUpperCase()
-    }
-    set(value) {
-        if (value.length>1)
-            field=value
-    }
+            return field.toUpperCase()
+        }
+        set(value) {
+            if (value.length>1)
+                field=value
+        }
 
     var surname: String = _surname
         get() {
@@ -18,10 +18,10 @@ class Teacher(_name: String, _surname: String, _age: Int, _numClass: Int, _workE
         }
 
     var numClass: Int = _numClass
-    set(value) {
-        if((value>0) && (value<12))
-            field = value
-    }
+        set(value) {
+            if((value>0) && (value<12))
+                field = value
+        }
 
     var workExperience: Double = _workExperience
         set(value) {
@@ -74,7 +74,7 @@ class Teacher(_name: String, _surname: String, _age: Int, _numClass: Int, _workE
         val _workExperience = "workExperience = $workExperience"
         return "$_name \n $_surname \n $_age \n $_numClass \n $_workExperience"
     }
-
+    //for me
     fun printInfo(): String{
         return "\n Name: $name\n " +
                 "Surname: $surname\n " +

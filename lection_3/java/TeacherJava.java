@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class TeacherJava {
     private String name;
     private String surname;
@@ -46,5 +48,29 @@ public class TeacherJava {
     }
     public double getWorkExperience() {
         return workExperience;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TeacherJava tj = (TeacherJava) o;
+        return tj.name == this.name &&
+                tj.surname == this.surname &&
+                tj.age == this.age &&
+                tj.numClass == this.numClass &&
+                Double.compare(tj.workExperience, this.workExperience) == 0;
+        //return age == that.age && numClass == that.numClass && Double.compare(that.workExperience, workExperience) == 0 && Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, age, numClass, workExperience);
+    }
+
+    @Override
+    public String toString(){
+        return "Name = "+ this.name +", Surname = "+this.surname + ", Age = " +
+                this.age + ", Class = " + this.numClass  + ", WorkExperience = " + this.workExperience;
     }
 }
