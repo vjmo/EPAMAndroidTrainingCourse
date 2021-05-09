@@ -29,4 +29,7 @@ fun main(){
     println("Status - ${Status.not_married}")
 
     println("\n* Task 4")
+    val student: Human.Student = Human.Student(19,"Polly",289,"Прикладная информатика",Status.not_married)
+    val lecturer: Human.Lecturer = Human.Lecturer("Boris",22.9,66)
+    val rector: Human.Rector = Human.Rector("Stepan",30.0,"OxfordOL",Status.married)
 }
