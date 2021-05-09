@@ -14,5 +14,19 @@ fun main(){
     if (teacherJavaOne == teacherJavaTwo) println("Objects are equal")
     else println("Objects are not equal")
 
-    println("* Task 2\n")
+    println("\n* Task 2")
+    val car: Car = Car(Color.black, "BMW", 4, 4,false)
+    car.infoTransmission()
+    car.printInfoTransport()
+
+    val motorcycle: Motorcycle = Motorcycle(Color.blue, "Honda", 2, 2,200.0)
+    motorcycle.printInfoTransport()
+
+    val bus: Bus = Bus (Color.red, "PAZ-672",4,40,"Экскурсионный")
+    bus.printInfoTransport()
+
+    println("\n* Task 3")
+    println("Status - ${Status.not_married}")
+
+    println("\n* Task 4")
 }
