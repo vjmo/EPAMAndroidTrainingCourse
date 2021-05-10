@@ -1,0 +1,202 @@
+Index: lection_3/kotlin/Teacher.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class Teacher(_name: String, _surname: String, _age: Int, _numClass: Int, _workExperience: Double) {\r\n    var name: String = _name\r\n        get() {\r\n            return field.toUpperCase()\r\n        }\r\n        set(value) {\r\n            if (value.length>1)\r\n                field=value\r\n        }\r\n\r\n    var surname: String = _surname\r\n        get() {\r\n            return field.toUpperCase()\r\n        }\r\n        set(value) {\r\n            if (value.length>1)\r\n                field=value\r\n        }\r\n\r\n    var numClass: Int = _numClass\r\n        set(value) {\r\n            if((value>0) && (value<12))\r\n                field = value\r\n        }\r\n\r\n    var workExperience: Double = _workExperience\r\n        set(value) {\r\n            if((value>0) && (value<115))\r\n                field = value\r\n        }\r\n\r\n    var age: Int = _age\r\n        set(value) {\r\n            if((value>0) and (value<115))\r\n                field = value\r\n        }\r\n\r\n\r\n    override fun equals(other: Any?): Boolean {\r\n        if (this === other) return true\r\n        if(other !is Teacher)\r\n            return false\r\n        else{\r\n            if (other.name == this.name)\r\n                return true\r\n            if (other.surname == this.surname)\r\n                return true\r\n            if(other.age == this.age)\r\n                return true\r\n            if(other.numClass == this.numClass)\r\n                return true\r\n            if (other.workExperience == this.workExperience)\r\n                return true\r\n        }\r\n        return false\r\n    }\r\n\r\n    override fun hashCode(): Int {\r\n        var prime: Int = 31\r\n        var result: Int = 1\r\n        result = prime * result +name.hashCode()\r\n        result = prime * result + surname.hashCode()\r\n        result = prime * result + age.hashCode()\r\n        result = prime * result + numClass.hashCode()\r\n        result = prime * result + workExperience.hashCode()\r\n        return result\r\n    }\r\n\r\n    override fun toString(): String {\r\n        val _name = \"name = $name\"\r\n        val _surname = \"surname = $surname\"\r\n        val _age = \"age = $age\"\r\n        val _numClass = \"numClass = $numClass\"\r\n        val _workExperience = \"workExperience = $workExperience\"\r\n        return \"$_name \\n $_surname \\n $_age \\n $_numClass \\n $_workExperience\"\r\n    }\r\n    //for me\r\n    fun printInfo(): String{\r\n        return \"\\n Name: $name\\n \" +\r\n                \"Surname: $surname\\n \" +\r\n                \"Age: $age\\n \" +\r\n                \"Class: $numClass\\n\" +\r\n                \"WorkExperience: $workExperience\\n\"\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lection_3/kotlin/Teacher.kt b/lection_3/kotlin/Teacher.kt
+--- a/lection_3/kotlin/Teacher.kt	(revision c984286e210e687695d235180db7cf7071e541ba)
++++ b/lection_3/kotlin/Teacher.kt	(date 1620664815129)
+@@ -41,15 +41,9 @@
+         if(other !is Teacher)
+             return false
+         else{
+-            if (other.name == this.name)
+-                return true
+-            if (other.surname == this.surname)
+-                return true
+-            if(other.age == this.age)
+-                return true
+-            if(other.numClass == this.numClass)
+-                return true
+-            if (other.workExperience == this.workExperience)
++            if ((other.name == this.name) && (other.surname == this.surname) &&
++                (other.age == this.age) && (other.numClass == this.numClass) &&
++                (other.workExperience == this.workExperience))
+                 return true
+         }
+         return false
+@@ -74,8 +68,8 @@
+         val _workExperience = "workExperience = $workExperience"
+         return "$_name \n $_surname \n $_age \n $_numClass \n $_workExperience"
+     }
+-    //for me
+-    fun printInfo(): String{
++
++    fun getInfo(): String{
+         return "\n Name: $name\n " +
+                 "Surname: $surname\n " +
+                 "Age: $age\n " +
+Index: lection_3/kotlin/Main.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nfun main(){\r\n    println(\"* Task 1\\n - Kotlin:\")\r\n    val teacherOne: Teacher = Teacher(\"Tom\", \"Cat\", 25, 9, 2.0)\r\n    val teacherTwo: Teacher = Teacher(\"Jerry\", \"Mouse\", 22, 10, 1.0)\r\n    //val teacherTwo: Teacher = Teacher(\"Tom\", \"Cat\", 25, 9, 2.0)\r\n    if (teacherOne == teacherTwo) println(\"Objects are equal\")\r\n    else println(\"Objects are not equal\")\r\n\r\n    println(\"\\n - Java:\")\r\n    val teacherJavaOne: TeacherJava = TeacherJava(\"Tom\", \"Cat\", 25, 9, 2.0)\r\n    val teacherJavaTwo: TeacherJava = TeacherJava(\"Jerry\", \"Mouse\", 22, 10, 1.0)\r\n    //val teacherJavaTwo: TeacherJava = TeacherJava(\"Tom\", \"Cat\", 25, 9, 2.0)\r\n    if (teacherJavaOne == teacherJavaTwo) println(\"Objects are equal\")\r\n    else println(\"Objects are not equal\")\r\n\r\n    println(\"\\n* Task 2\")\r\n    val car: Car = Car(Color.black, \"BMW\", 4, 4,false)\r\n    car.infoTransmission()\r\n    car.printInfoTransport()\r\n\r\n    val motorcycle: Motorcycle = Motorcycle(Color.blue, \"Honda\", 2, 2,200.0)\r\n    motorcycle.printInfoTransport()\r\n\r\n    val bus: Bus = Bus (Color.red, \"PAZ-672\",4,40,\"Экскурсионный\")\r\n    bus.printInfoTransport()\r\n\r\n    println(\"\\n* Task 3\")\r\n    println(\"Status - ${Status.not_married}\")\r\n\r\n    println(\"\\n* Task 4\")\r\n    val student: Human.Student = Human.Student(19,\"Polly\",289,\"Прикладная информатика\",Status.not_married)\r\n    val lecturer: Human.Lecturer = Human.Lecturer(\"Boris\",22.9,66)\r\n    val rector: Human.Rector = Human.Rector(\"Stepan\",30.0,\"OxfordOL\",Status.married)\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lection_3/kotlin/Main.kt b/lection_3/kotlin/Main.kt
+--- a/lection_3/kotlin/Main.kt	(revision c984286e210e687695d235180db7cf7071e541ba)
++++ b/lection_3/kotlin/Main.kt	(date 1620664232358)
+@@ -3,33 +3,31 @@
+     println("* Task 1\n - Kotlin:")
+     val teacherOne: Teacher = Teacher("Tom", "Cat", 25, 9, 2.0)
+     val teacherTwo: Teacher = Teacher("Jerry", "Mouse", 22, 10, 1.0)
+-    //val teacherTwo: Teacher = Teacher("Tom", "Cat", 25, 9, 2.0)
+     if (teacherOne == teacherTwo) println("Objects are equal")
+     else println("Objects are not equal")
+ 
+     println("\n - Java:")
+     val teacherJavaOne: TeacherJava = TeacherJava("Tom", "Cat", 25, 9, 2.0)
+     val teacherJavaTwo: TeacherJava = TeacherJava("Jerry", "Mouse", 22, 10, 1.0)
+-    //val teacherJavaTwo: TeacherJava = TeacherJava("Tom", "Cat", 25, 9, 2.0)
+     if (teacherJavaOne == teacherJavaTwo) println("Objects are equal")
+     else println("Objects are not equal")
+ 
+     println("\n* Task 2")
+-    val car: Car = Car(Color.black, "BMW", 4, 4,false)
++    val car: Car = Car(Color.BLACK, "BMW", 4, 4,false)
+     car.infoTransmission()
+     car.printInfoTransport()
+ 
+-    val motorcycle: Motorcycle = Motorcycle(Color.blue, "Honda", 2, 2,200.0)
++    val motorcycle: Motorcycle = Motorcycle(Color.BLUE, "Honda", 2, 2,200.0)
+     motorcycle.printInfoTransport()
+ 
+-    val bus: Bus = Bus (Color.red, "PAZ-672",4,40,"Экскурсионный")
++    val bus: Bus = Bus (Color.RED, "PAZ-672",4,40,"Экскурсионный")
+     bus.printInfoTransport()
+ 
+     println("\n* Task 3")
+-    println("Status - ${Status.not_married}")
++    println("Status - ${Status.NOT_MARRIED}")
+ 
+     println("\n* Task 4")
+-    val student: Human.Student = Human.Student(19,"Polly",289,"Прикладная информатика",Status.not_married)
++    val student: Human.Student = Human.Student(19,"Polly",289,"Прикладная информатика",Status.NOT_MARRIED)
+     val lecturer: Human.Lecturer = Human.Lecturer("Boris",22.9,66)
+-    val rector: Human.Rector = Human.Rector("Stepan",30.0,"OxfordOL",Status.married)
++    val rector: Human.Rector = Human.Rector("Stepan",30.0,"OxfordOL",Status.MARRIED)
+ }
+\ No newline at end of file
+Index: lection_3/kotlin/Status.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>enum class Status {\r\n    married, not_married, single\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lection_3/kotlin/Status.kt b/lection_3/kotlin/Status.kt
+--- a/lection_3/kotlin/Status.kt	(revision c984286e210e687695d235180db7cf7071e541ba)
++++ b/lection_3/kotlin/Status.kt	(date 1620664113520)
+@@ -1,3 +1,3 @@
+ enum class Status {
+-    married, not_married, single
++    MARRIED, NOT_MARRIED, SINGLE
+ }
+\ No newline at end of file
+Index: lection_3/java/TeacherJava.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.util.Objects;\r\n\r\npublic class TeacherJava {\r\n    private String name;\r\n    private String surname;\r\n    private int age;\r\n    private int numClass;\r\n    private double workExperience;\r\n\r\n    public TeacherJava (String _name, String _surname, int _age, int _numClass, double _workExperience){\r\n        name = _name;\r\n        surname = _surname;\r\n        age = _age;\r\n        numClass = _numClass;\r\n        workExperience = _workExperience;\r\n    }\r\n\r\n    public void setName(String _name){\r\n        this.name = _name;\r\n    }\r\n    public String getName(){\r\n        return name;\r\n    }\r\n\r\n    public void setSurname(String _surname){\r\n        this.surname = _surname;\r\n    }\r\n    public String getSurname(){\r\n        return surname;\r\n    }\r\n\r\n    public void setAge(int _age){\r\n        this.age = _age;\r\n    }\r\n    public int getAge() {\r\n        return age;\r\n    }\r\n\r\n    public void setNumClass(int _numClass){\r\n        this.numClass = _numClass;\r\n    }\r\n    public int getNumClass() {\r\n        return numClass;\r\n    }\r\n\r\n    public void setWorkExperience(double _workExperience) {\r\n        this.workExperience = _workExperience;\r\n    }\r\n    public double getWorkExperience() {\r\n        return workExperience;\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (this == o) return true;\r\n        if (o == null || getClass() != o.getClass()) return false;\r\n        TeacherJava tj = (TeacherJava) o;\r\n        return tj.name == this.name &&\r\n                tj.surname == this.surname &&\r\n                tj.age == this.age &&\r\n                tj.numClass == this.numClass &&\r\n                Double.compare(tj.workExperience, this.workExperience) == 0;\r\n        //return age == that.age && numClass == that.numClass && Double.compare(that.workExperience, workExperience) == 0 && Objects.equals(name, that.name) && Objects.equals(surname, that.surname);\r\n    }\r\n\r\n    @Override\r\n    public int hashCode() {\r\n        return Objects.hash(name, surname, age, numClass, workExperience);\r\n    }\r\n\r\n    @Override\r\n    public String toString(){\r\n        return \"Name = \"+ this.name +\", Surname = \"+this.surname + \", Age = \" +\r\n                this.age + \", Class = \" + this.numClass  + \", WorkExperience = \" + this.workExperience;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lection_3/java/TeacherJava.java b/lection_3/java/TeacherJava.java
+--- a/lection_3/java/TeacherJava.java	(revision c984286e210e687695d235180db7cf7071e541ba)
++++ b/lection_3/java/TeacherJava.java	(date 1620663982441)
+@@ -7,17 +7,18 @@
+     private int numClass;
+     private double workExperience;
+ 
+-    public TeacherJava (String _name, String _surname, int _age, int _numClass, double _workExperience){
+-        name = _name;
+-        surname = _surname;
+-        age = _age;
+-        numClass = _numClass;
+-        workExperience = _workExperience;
++    public TeacherJava (String name, String surname, int age, int numClass, double workExperience){
++        this.name = name;
++        this.surname = surname;
++        this.age = age;
++        this.numClass = numClass;
++        this.workExperience = workExperience;
+     }
+ 
+     public void setName(String _name){
+         this.name = _name;
+     }
++
+     public String getName(){
+         return name;
+     }
+@@ -25,6 +26,7 @@
+     public void setSurname(String _surname){
+         this.surname = _surname;
+     }
++
+     public String getSurname(){
+         return surname;
+     }
+@@ -32,6 +34,7 @@
+     public void setAge(int _age){
+         this.age = _age;
+     }
++
+     public int getAge() {
+         return age;
+     }
+@@ -39,6 +42,7 @@
+     public void setNumClass(int _numClass){
+         this.numClass = _numClass;
+     }
++
+     public int getNumClass() {
+         return numClass;
+     }
+@@ -46,6 +50,7 @@
+     public void setWorkExperience(double _workExperience) {
+         this.workExperience = _workExperience;
+     }
++
+     public double getWorkExperience() {
+         return workExperience;
+     }
+@@ -60,7 +65,6 @@
+                 tj.age == this.age &&
+                 tj.numClass == this.numClass &&
+                 Double.compare(tj.workExperience, this.workExperience) == 0;
+-        //return age == that.age && numClass == that.numClass && Double.compare(that.workExperience, workExperience) == 0 && Objects.equals(name, that.name) && Objects.equals(surname, that.surname);
+     }
+ 
+     @Override
+Index: lection_3/kotlin/Color.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>enum class Color {\r\n    red, green, blue,\r\n    white, black, grey,\r\n    yellow, orange\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/lection_3/kotlin/Color.kt b/lection_3/kotlin/Color.kt
+--- a/lection_3/kotlin/Color.kt	(revision c984286e210e687695d235180db7cf7071e541ba)
++++ b/lection_3/kotlin/Color.kt	(date 1620664061462)
+@@ -1,5 +1,5 @@
+ enum class Color {
+-    red, green, blue,
+-    white, black, grey,
+-    yellow, orange
++    RED, GREEN, BLUE,
++    WHITE, BLACK, GREY,
++    YELLOW, ORANGE
+ }
+\ No newline at end of file
