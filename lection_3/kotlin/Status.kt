@@ -1,3 +1,3 @@
 enum class Status {
-    MARRIED, NOT_MARRIED, SINGLE
+    NOT_MARRIED, MARRIED,  SINGLE
 }
