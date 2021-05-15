@@ -1,6 +1,5 @@
 class Car(color: Color, name: String, numberOfWheels: Int, maxPeople: Int, var transmission: Boolean) :
     Transport(color, name, numberOfWheels, maxPeople) {
-
     fun infoTransmission(){
         println("Mechanical = true; Automatic = false")
     }

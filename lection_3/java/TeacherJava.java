@@ -77,5 +77,4 @@ public class TeacherJava {
         return "Name = "+ this.name +", Surname = "+this.surname + ", Age = " +
                 this.age + ", Class = " + this.numClass  + ", WorkExperience = " + this.workExperience;
     }
-
 }

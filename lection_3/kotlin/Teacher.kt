@@ -1,5 +1,4 @@
 class Teacher(_name: String, _surname: String, _age: Int, _numClass: Int, _workExperience: Double) {
-
     var name: String = _name
         get() {
         return field.toUpperCase()
