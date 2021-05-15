@@ -1,1 +1,2 @@
-data class UserUiModel(var name: String, var surname: String)
+data class UserUiModel(var name: String,
+                       var surname: String)
