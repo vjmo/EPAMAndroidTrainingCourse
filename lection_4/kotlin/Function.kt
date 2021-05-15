@@ -1,9 +1,16 @@
 typealias Ui = UserUiModel
 
-fun User.printInfo(numberOfSpaces: Int, printing: (String)->Unit) {
+fun User.printInfo(numberOfChar: Int) {
 
-    println("Name: $name Surname: $surname$ Age: $age$ Email: $email$ Phone: $numberPhone\n")
-    printing("Name: $name Surname: $surname$ Age: $age$ Email: $email$ Phone: $numberPhone\n")
+    var space: String = " "
+    var stringUser: String = "Name:$name${space.repeat(numberOfChar)}" +
+            "Surname:$surname${space.repeat(numberOfChar)}" +
+            "Age:$age${space.repeat(numberOfChar)}" +
+            "Email:${space.repeat(numberOfChar)}" +
+            "Phone:$numberPhone"
+    println(stringUser)
+    fun printing() {}
+
 }
 
 fun User.toUserUiModel() = Ui(
@@ -12,6 +19,5 @@ fun User.toUserUiModel() = Ui(
 )
 
 inline fun User.printInfoInline(numberOfSpaces: Int, printing: (String)->Unit){
-    println("Name: $name Surname: $surname$ Age: $age$ Email: $email$ Phone: $numberPhone\n")
-    printing("Name: $name Surname: $surname$ Age: $age$ Email: $email$ Phone: $numberPhone\n")
+//copy
 }
