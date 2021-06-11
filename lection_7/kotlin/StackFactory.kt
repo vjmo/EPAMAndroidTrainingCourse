@@ -1,3 +1,5 @@
-class StackFactory<T> {
-    fun createStack(): Stack<T> = Stack()
+class StackFactory {
+    companion object {
+        fun createStack(): Stack = Stack()
+    }
 }

@@ -1,7 +1,12 @@
-class PushWorker<T>(private val stack: Stack<T>, private val element: T) : Runnable {
+import java.util.*
+
+class PushWorker(private val stack: Stack) : Thread() {
     override fun run() {
-        stack.push(element)
-        Thread.sleep(3000)
-        Thread.interrupted()
+        while (true) {
+            if (!Thread.interrupted()) {
+                stack.push()
+            } else return
+        }
+        println("Stop ----- ${Thread.currentThread().name}")
     }
 }

@@ -1,87 +1,77 @@
 import java.util.concurrent.Callable
-import java.util.concurrent.Executor
-import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 fun main() {
+
     //  *** TASK 1 ***
 
-    Thread(Runnable {
-        for (i in 0..5) {
-            println("First thread: ${Thread.currentThread().name}")
-        }
+    println("Main thread: ${Thread.currentThread().name}")
+
+    val threadFirst = Thread {
+        println("First thread: ${Thread.currentThread().name}")
         Thread.sleep(5000)
 
-        Thread(Runnable {
+        val secondThread = Thread {
+            println("Second thread: ${Thread.currentThread().name}")
+        }
+        secondThread.start()
+        secondThread.join()
+    }
+    threadFirst.start()
+    threadFirst.join()
 
-            for (i in 0..5) {
-                println("Second thread: ${Thread.currentThread().name}")
-            }
-        }).start()
-    }).start()
-
-    println("I'm run!")
-    Thread().start()
-    Thread.currentThread().name
+    println("I'm run! ${Thread.currentThread().name}")
 
     // *** TASK 2 ***
 
-    var testStack: Stack<Int> = Stack()
-    testStack.push(4)
-    testStack.printStack()
-    testStack.pop()
-    testStack.printStack()
-    testStack.push(6)
-    testStack.printStack()
+    val testStack = StackFactory.createStack()
 
-    Thread(Runnable {
-        var stackFactory: StackFactory<Int> = StackFactory()
-        stackFactory.createStack()
-        println("Thread ${Thread.currentThread().name} creates a stack.")
-    }).start()
+    val testPushWorker = PushWorker(testStack)
+    println("$testPushWorker added an item to the stack.")
+    testPushWorker.start()
 
+    val testPopWorker = PopWorker(testStack)
+    println("$testPopWorker popped an item from the stack.")
+    testPopWorker.start()
 
-    Thread(Runnable {
-        var popWorker: PopWorker<Int> = PopWorker(testStack)
-        println("Thread ${Thread.currentThread().name} popped an item from the stack.")
-        println("Thread ${Thread.currentThread().name} interrupted.")
-    }).start()
+    Thread.sleep(3000)
 
-    Thread(Runnable {
-        var pushWorker: PushWorker<Int> = PushWorker(testStack, element = 7)
-        println("Thread ${Thread.currentThread().name} added an item to the stack.")
-        println("Thread ${Thread.currentThread().name} interrupted.")
-    }).start()
+    try {
+        testPushWorker.interrupt()
+        println("$testPushWorker interrupted.")
+
+        testPopWorker.interrupt()
+        println("$testPopWorker interrupted.")
+    } catch (e: InterruptedException) {
+        e.printStackTrace()
+    }
 
     // *** TASK 3 ***
 
-    var executorSingle = Executors.newSingleThreadExecutor()
-    for (task in 1..3)
-        executorSingle.execute(Task())
-    println("Shutdown executor")
+    val executorSingle = Executors.newSingleThreadExecutor()
+    for (task in 0..2)
+        executorSingle.execute { println(Thread.currentThread().name) }
     executorSingle.shutdown()
 
-    var executorFixed = Executors.newFixedThreadPool(3)
-    for (task in 1..5) {
+    val executorFixed = Executors.newFixedThreadPool(3)
+    for (task in 0..4) {
         executorFixed.submit(Callable {
             println("Callable Task! ${Thread.currentThread().name}")
         })
     }
-    println("Shutdown executor")
     executorFixed.shutdown()
 
-    var executorCached = Executors.newCachedThreadPool()
-    for (task in 1..3)
-        executorCached.execute(Task())
-    println("Shutdown executor")
+    val executorCached = Executors.newCachedThreadPool()
+    for (task in 0..2)
+        executorCached.execute { println(Thread.currentThread().name) }
     executorCached.shutdown()
 
-    var executorScheduled = Executors.newScheduledThreadPool(2)
-    executorScheduled.execute(Task())
-    Thread.sleep(3000)
-    executorScheduled.execute(Task())
-    Thread.sleep(3000)
-    executorScheduled.execute(Task())
-    Thread.sleep(3000)
+    val executorScheduled = Executors.newScheduledThreadPool(2)
+    executorScheduled.execute {
+        for (task in 0..2) {
+            println(Thread.currentThread().name)
+            Thread.sleep(3000)
+        }
+    }
     executorScheduled.shutdown()
 }

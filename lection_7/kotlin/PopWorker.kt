@@ -1,7 +1,10 @@
-class PopWorker<T>(private val stack: Stack<T>) : Runnable {
+class PopWorker(private val stack: Stack) : Thread() {
     override fun run() {
-        stack.pop()
-        Thread.sleep(3000)
-        Thread.interrupted()
+        while (true) {
+            if (!Thread.interrupted()) {
+                stack.pop()
+            } else return
+        }
+        println("Stop ----- ${Thread.currentThread().name}")
     }
 }

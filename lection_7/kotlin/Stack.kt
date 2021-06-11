@@ -1,39 +1,35 @@
 import java.util.*
 
-class Stack<T> {
-    private var stack: MutableList<T> = mutableListOf()
+open class Stack {
 
-    fun push(element: T?) {
-        if (stack.size < 1) {
-            if (element != null) {
-                stack.add(element)
-            }
-        }
+    private val itemsList: MutableList<Stack> = mutableListOf()
+
+    @Synchronized
+    fun push() {
+        if (itemsList.isEmpty())
+            itemsList.add(Stack())
     }
 
-    fun pop(): T {
+    @Synchronized
+    fun pop() {
         val removeElement = peek()
-        stack.remove(removeElement)
-        return removeElement
+        itemsList.remove(removeElement)
     }
 
-    fun peek(): T {
-        if (stack.isEmpty()) {
+    @Synchronized
+    fun peek() {
+        if (itemsList.isEmpty()) {
             throw EmptyStackException()
         }
-        return stack.last()
+        itemsList.last()
     }
 
-    fun size(): Int {
-        return stack.size
-    }
+    fun size(): Int = itemsList.size
 
-    fun isEmpty(): Boolean {
-        return stack.isEmpty()
-    }
+    fun isEmpty(): Boolean = itemsList.isEmpty()
 
     fun printStack() {
-        for (el in stack) {
+        for (el in itemsList) {
             print("[$el]")
         }
         println()
